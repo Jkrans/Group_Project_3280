@@ -1,0 +1,32 @@
+﻿<Window x:Class="Group_Project_3280.Main.wndMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Group_Project_3280.Main"
+        mc:Ignorable="d"
+        Title="Invoice Home" Height="450" Width="800">
+    <Grid Margin="0,0,0,1">
+        <Menu>
+            <MenuItem x:Name="menuSearchInvoice" Header="Search Invoice" HorizontalAlignment="Right" FontSize="14" Click="menuSearchInvoice_Click" BorderBrush="{x:Null}" Background="#FFA5A9FF" />
+            <MenuItem x:Name="menuItemListMenu" HorizontalAlignment="Right" Header="Item List" FontSize="14" Click="menuItemListMenu_Click" Background="#FF8085F7" />
+        </Menu>
+
+        <Button x:Name="btnAddInvoice" Content="Add Invoice" Margin="42,57,649,309"/>
+        <Button x:Name="btnEditInvoice" Content="Edit Invoice" Margin="42,131,649,235"/>
+        <Button x:Name="btnDeleteInvoice" Content="Delete Invoice" Margin="42,206,649,160"/>
+
+        <ListBox HorizontalAlignment="Left" Height="201" Margin="191,57,0,0" VerticalAlignment="Top" Width="427"/>
+        <Label Content="Invoice #: " HorizontalAlignment="Left" Margin="233,18,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date: " HorizontalAlignment="Left" Margin="422,18,0,0" VerticalAlignment="Top"/>
+        <Label Content="Invoice Total: " HorizontalAlignment="Left" Margin="638,232,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add Item" HorizontalAlignment="Left" Margin="495,285,0,0" VerticalAlignment="Top" Width="123" Height="38"/>
+        <Button Content="Delete Item" HorizontalAlignment="Left" Margin="638,77,0,0" VerticalAlignment="Top" Width="75" Height="32"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="638,361,0,0" VerticalAlignment="Top" Width="120" Height="32"/>
+        <ComboBox HorizontalAlignment="Left" Margin="191,278,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Price: $ " HorizontalAlignment="Left" Margin="329,278,0,0" VerticalAlignment="Top"/>
+        <Label Content="Quantity: " HorizontalAlignment="Left" Margin="329,309,0,0" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</Window>
