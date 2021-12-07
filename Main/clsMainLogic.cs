@@ -32,7 +32,7 @@ namespace Group_Project_3280.Main
             try
             {
                 SQL = new clsMainSQL();
-                
+
                 items = SQL.GetAllItems();
             }
             catch (Exception ex)
@@ -63,7 +63,43 @@ namespace Group_Project_3280.Main
 
         #endregion
 
-        #region Invoice functionality
+        #region CRUD methods
+        /// <summary>
+        /// Reset items list when new item is added.
+        /// </summary>
+        public void ResetItemsList()
+        {
+            try
+            {
+                ItemsList.Clear();
+                foreach (Item item in SQL.GetAllItems())
+                {
+                    ItemsList.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Resets the current invoice list
+        /// </summary>
+        public void ResetSelectedInvoice()
+        {
+            try
+            {
+                CurrentInvoice.Items.Clear();
+
+                CurrentInvoice.Items = SQL.GetItemsByInvoiceNum(CurrentInvoice.Number);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// Sets current invoice to new to create a new invoice. 
         /// </summary>
@@ -71,7 +107,7 @@ namespace Group_Project_3280.Main
         {
             try
             {
-                invoice = new Invoice(); 
+                invoice = new Invoice();
             }
             catch (Exception ex)
             {
@@ -87,6 +123,22 @@ namespace Group_Project_3280.Main
             try
             {
                 SQL.DeleteInvoice(invoice);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Deletes item from invoice
+        /// </summary>
+        /// <param name="ItemSelected"></param>
+        public void DeleteItem( Item ItemSelected )
+        {
+            try
+            {
+                CurrentInvoice.Items.Remove(ItemSelected);
             }
             catch (Exception ex)
             {
@@ -113,13 +165,13 @@ namespace Group_Project_3280.Main
                 {
                     CurrentInvoice.Date = Date;
                 }
-                
+
                 if (CurrentInvoice.Number == 0) // 0 means the invoice is new
                 {
                     newInvoiceNumber = SQL.InsertNewInvoice(CurrentInvoice);
                     CurrentInvoice.Number = newInvoiceNumber;
                 }
-                else // if it's not new, update existing invoice Date and item/s
+                else // if it's not new, update existing invoice Date and item(s).
                 {
                     SQL.UpdateInvoiceDate(CurrentInvoice);
                     SQL.UpdateInvoiceItem(CurrentInvoice);
@@ -133,14 +185,14 @@ namespace Group_Project_3280.Main
         }
 
         /// <summary>
-        /// Add Item/s to the current invoice
+        /// Add Item(s) to the current invoice.
         /// </summary>
-        /// <param name="ItemSelected">Item to add</param>
-        /// <param name="Qnty">Number of this item to add</param>
+        /// <param name="ItemSelected">The item to add.</param>
+        /// <param name="ItemQuantity">The number of ItemsSelected to add.</param>
         public void AddItem( Item ItemSelected, int ItemQuantity )
         {
             try
-            {                
+            {
                 for (int i = 0; i < ItemQuantity; i++)
                 {
                     CurrentInvoice.Items.Add(new Item(ItemSelected.Code, ItemSelected.Description, ItemSelected.Cost));
