@@ -22,9 +22,18 @@ namespace Group_Project_3280.Main
     /// </summary>
     public partial class wndMain : Window
     {
+        /// <summary>
+        /// Main Logic Object
+        /// </summary>
+        private clsMainLogic mainLogic;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public wndMain()
         {
             InitializeComponent();
+            mainLogic = new clsMainLogic();
         }
 
         /// <summary>

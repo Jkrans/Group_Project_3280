@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="clsDataAccess.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="Main\clsMainLogic.cs" />
+    <Compile Include="Main\clsMainSQL.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Search\clsSearchLogic.cs" />
     <Compile Include="Search\clsSearchSQL.cs" />
     <Compile Include="Search\wndSearch.xaml.cs">
