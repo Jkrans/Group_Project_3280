@@ -36,6 +36,45 @@ namespace Group_Project_3280.Main
             }
         }
 
+        #region SQL insert queries
+        ///<summary>
+        ///Insert new Invoice, return its number for displaying
+        ///</summary>
+        ///<param name="newInvoice">Invoice number</param>
+        public int InsertNewInvoice( Invoice newInvoice )
+        {
+            try
+            {
+                //Insert new Invoice first
+                string sql = "INSERT INTO Invoices(InvoiceDate, TotalCost) VALUES('" + newInvoice.Date + "', '" + newInvoice.Total + "')";
+
+                dataAccess.ExecuteNonQuery(sql);
+
+                //Get that Invoice Number
+                sql = "SELECT TOP 1 InvoiceNum FROM Invoices ORDER BY InvoiceNum DESC";
+                int retVal = 0;
+                dataSet = dataAccess.ExecuteSQLStatement(sql, ref retVal);
+                int invoiceNum = Convert.ToInt32(dataSet.Tables[0].Rows[0][0]);
+
+                //insert Line items
+                int lineItemNumber = 1;
+                foreach (Item item in newInvoice.Items)
+                {
+                    sql = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) VALUES('" + invoiceNum + "', '" + lineItemNumber + "', '" + item.Code + "')";
+                    dataAccess.ExecuteNonQuery(sql);
+                    lineItemNumber++;
+
+                }
+
+                return invoiceNum;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+        #endregion
+
         #region SQL get queries
         /// <summary>
         /// SQL to get all items.
@@ -127,7 +166,7 @@ namespace Group_Project_3280.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-        #endregion
+        #endregion        
 
         #region SQL update queries
         /// <summary>
@@ -180,45 +219,6 @@ namespace Group_Project_3280.Main
         }
         #endregion
 
-        #region SQL insert queries
-        ///<summary>
-        ///Insert new Invoice, return its number for displaying
-        ///</summary>
-        ///<param name="newInvoice">Invoice number</param>
-        public int InsertNewInvoice( Invoice newInvoice )
-        {
-            try
-            {
-                //Insert new Invoice first
-                string sql = "INSERT INTO Invoices(InvoiceDate, TotalCost) VALUES('" + newInvoice.Date + "', '" + newInvoice.Total + "')";
-
-                dataAccess.ExecuteNonQuery(sql);
-
-                //Get that Invoice Number
-                sql = "SELECT TOP 1 InvoiceNum FROM Invoices ORDER BY InvoiceNum DESC";
-                int retVal = 0;
-                dataSet = dataAccess.ExecuteSQLStatement(sql, ref retVal);
-                int invoiceNum = Convert.ToInt32(dataSet.Tables[0].Rows[0][0]);
-
-                //insert Line items
-                int lineItemNumber = 1;
-                foreach (Item item in newInvoice.Items)
-                {
-                    sql = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) VALUES('" + invoiceNum + "', '" + lineItemNumber + "', '" + item.Code + "')";
-                    dataAccess.ExecuteNonQuery(sql);
-                    lineItemNumber++;
-
-                }
-
-                return invoiceNum;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
-            }
-        }
-        #endregion
-
         #region SQL delete queries
 
         /// <summary>
@@ -243,7 +243,6 @@ namespace Group_Project_3280.Main
             }
         }
 
-        #endregion
-        
+        #endregion        
     }
 }
