@@ -12,7 +12,7 @@ namespace Group_Project_3280.Main
         /// <summary>
         /// SQL Object
         /// </summary>
-        private clsMainSQL SQL;
+        private clsMainSQL sql;
 
         /// <summary>
         /// Invoice
@@ -31,9 +31,9 @@ namespace Group_Project_3280.Main
         {
             try
             {
-                SQL = new clsMainSQL();
+                sql = new clsMainSQL();
 
-                items = SQL.GetAllItems();
+                items = sql.GetAllItems();
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace Group_Project_3280.Main
             try
             {
                 ItemsList.Clear();
-                foreach (Item item in SQL.GetAllItems())
+                foreach (Item item in sql.GetAllItems())
                 {
                     ItemsList.Add(item);
                 }
@@ -92,7 +92,7 @@ namespace Group_Project_3280.Main
             {
                 CurrentInvoice.Items.Clear();
 
-                CurrentInvoice.Items = SQL.GetItemsByInvoiceNum(CurrentInvoice.Number);
+                CurrentInvoice.Items = sql.GetItemsByInvoiceNum(CurrentInvoice.Number);
             }
             catch (Exception ex)
             {
@@ -122,7 +122,7 @@ namespace Group_Project_3280.Main
         {
             try
             {
-                SQL.DeleteInvoice(invoice);
+                sql.DeleteInvoice(invoice);
             }
             catch (Exception ex)
             {
@@ -159,7 +159,7 @@ namespace Group_Project_3280.Main
                 // give date if user doesn't specify one themselves.
                 if (Date == "")
                 {
-                    CurrentInvoice.Date = DateTime.Now.ToString("MM/DD/YYYY");
+                    CurrentInvoice.Date = DateTime.Now.ToString("MM/dd/yyy");
                 }
                 else
                 {
@@ -168,13 +168,13 @@ namespace Group_Project_3280.Main
 
                 if (CurrentInvoice.Number == 0) // 0 means the invoice is new
                 {
-                    newInvoiceNumber = SQL.InsertNewInvoice(CurrentInvoice);
+                    newInvoiceNumber = sql.InsertNewInvoice(CurrentInvoice);
                     CurrentInvoice.Number = newInvoiceNumber;
                 }
                 else // if it's not new, update existing invoice Date and item(s).
                 {
-                    SQL.UpdateInvoiceDate(CurrentInvoice);
-                    SQL.UpdateInvoiceItem(CurrentInvoice);
+                    sql.UpdateInvoiceDate(CurrentInvoice);
+                    sql.UpdateInvoiceItem(CurrentInvoice);
                 }
 
             }

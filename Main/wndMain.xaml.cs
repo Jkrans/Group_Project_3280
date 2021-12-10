@@ -2,6 +2,7 @@
 using Group_Project_3280.Search;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -34,9 +35,11 @@ namespace Group_Project_3280.Main
         private ExceptionHandler handler;
 
         /// <summary>
-        /// 
+        /// The items that is currently selected.
         /// </summary>
         private Item selectedItem;
+
+        private clsDataAccess da;
 
         /// <summary>
         /// Default constructor
@@ -46,6 +49,7 @@ namespace Group_Project_3280.Main
             InitializeComponent();
             mainLogic = new clsMainLogic();
             handler = new ExceptionHandler();
+            da = new clsDataAccess();
         }
 
         /// <summary>
@@ -85,7 +89,7 @@ namespace Group_Project_3280.Main
 
                 cbItems.IsEnabled = true;
                 cbItems.ItemsSource = mainLogic.ItemsList;
-                cbItems.DisplayMemberPath = "ItemDescription";
+                cbItems.DisplayMemberPath = "Description";
 
                 mainLogic.CreateInvoice();
             }
@@ -114,7 +118,7 @@ namespace Group_Project_3280.Main
 
                 cbItems.IsEnabled = true;
                 cbItems.ItemsSource = mainLogic.ItemsList;
-                cbItems.DisplayMemberPath = "ItemDescription";             
+                cbItems.DisplayMemberPath = "Description";             
 
             }
             catch (Exception ex)
@@ -138,6 +142,8 @@ namespace Group_Project_3280.Main
                 if (confirmDeleteInvoice == MessageBoxResult.Yes)
                 {
                     mainLogic.DeleteInvoice();
+
+                    lblInvoiceTotal.Content = "";
 
                     btnDeleteInvoice.IsEnabled = false;
                     btnAddInvoice.IsEnabled = true;
@@ -166,16 +172,15 @@ namespace Group_Project_3280.Main
             {
 
                 //need to check for selection being -1
-                //if (((ComboBox)sender).SelectedIndex == -1)
-                //{
-                //    QuantityBox.IsEnabled = false;
-                //    AddItemBtn.IsEnabled = false;
-                //    return;
-                //}
-                 //else
-               // {
-
-                selectedItem = (Item)cbItems.SelectedItem;
+                if (((ComboBox)sender).SelectedIndex == -1)
+                {
+                    tbQuantity.IsEnabled = false;
+                    btnAddItem.IsEnabled = false;
+                    return;
+                }
+                else
+                {
+                    selectedItem = (Item)cbItems.SelectedItem;
                 if (!tbQuantity.IsEnabled)
                 {
                     tbQuantity.IsEnabled = true;
@@ -184,10 +189,13 @@ namespace Group_Project_3280.Main
                 {
                     btnAddItem.IsEnabled = true;
                 }
+
                 tbQuantity.Text = "1";
                 lblPrice.Content = selectedItem.Cost.ToString();
+                    
 
-               // }
+
+               }
             }
             catch (Exception ex)
             {
@@ -204,12 +212,14 @@ namespace Group_Project_3280.Main
         {
             try
             {
-                bool isValidQuantity = int.TryParse(tbQuantity.Text, out int quantity);
-                if (isValidQuantity && quantity > 0)
-                {
-                    mainLogic.AddItem(selectedItem, quantity);
-                }
-                
+                //bool isValidQuantity = int.TryParse(tbQuantity.Text, out int quantity);
+                //if (isValidQuantity && quantity > 0)
+                //{
+                //    mainLogic.AddItem(selectedItem, quantity);
+                //}
+                int qnty = Convert.ToInt32(tbQuantity.Text);
+                mainLogic.AddItem(selectedItem, qnty);
+
                 tbQuantity.Text = "0";
                 lblPrice.Content = "0.00";
                 lblInvoiceTotal.Content = mainLogic.CurrentInvoice.Total.ToString();
@@ -219,6 +229,77 @@ namespace Group_Project_3280.Main
 
                 btnSaveInvoice.IsEnabled = true;
 
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void btnDeleteItem_Click( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                if (lbItems.SelectedIndex == -1)
+                {
+                    return;
+                }
+                selectedItem = (Item)lbItems.SelectedItem;
+
+                
+
+                lblInvoiceTotal.Content = "";
+                mainLogic.DeleteItem(selectedItem);
+                lbItems.ItemsSource = mainLogic.CurrentInvoice.Items.ToList();
+                lblInvoiceTotal.Content = mainLogic.CurrentInvoice.Total.ToString();
+                btnDeleteItem.IsEnabled = false;
+
+                btnSaveInvoice.IsEnabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void btnSaveInvoice_Click( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                string date = tbDate.Text;
+                mainLogic.SaveInvoice(date);
+                tbDate.IsEnabled = false;
+
+                tbDate.Text = mainLogic.CurrentInvoice.Date.ToString();
+
+                lblInvoiceNumber.Content = mainLogic.CurrentInvoice.Number.ToString();
+
+                btnDeleteInvoice.IsEnabled = true;
+                btnEditInvoice.IsEnabled = true;
+                btnAddInvoice.IsEnabled = true;
+
+                lblPrice.Content = "$0.00";
+                tbQuantity.Text = "0";
+                cbItems.IsEnabled = false;
+                cbItems.SelectedIndex = -1;
+                btnSaveInvoice.IsEnabled = false;
+                lbItems.IsEnabled = false;
+
+
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void lbItems_SelectionChanged( object sender, SelectionChangedEventArgs e )
+        {
+            try
+            {
+                ListBox listBoxItem = (ListBox)sender;
+                btnDeleteItem.IsEnabled = true;
             }
             catch (Exception ex)
             {
