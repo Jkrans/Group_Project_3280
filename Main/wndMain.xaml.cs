@@ -144,6 +144,7 @@ namespace Group_Project_3280.Main
                     mainLogic.DeleteInvoice();
 
                     lblInvoiceTotal.Content = "";
+                    lblInvoiceNumber.Content = "";
 
                     btnDeleteInvoice.IsEnabled = false;
                     btnAddInvoice.IsEnabled = true;
@@ -162,7 +163,7 @@ namespace Group_Project_3280.Main
         }
 
         /// <summary>
-        /// 
+        /// Shows list of items
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -204,7 +205,7 @@ namespace Group_Project_3280.Main
         }
 
         /// <summary>
-        /// 
+        /// Adds an item to the invoice
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -212,16 +213,14 @@ namespace Group_Project_3280.Main
         {
             try
             {
-                //bool isValidQuantity = int.TryParse(tbQuantity.Text, out int quantity);
-                //if (isValidQuantity && quantity > 0)
-                //{
-                //    mainLogic.AddItem(selectedItem, quantity);
-                //}
-                int qnty = Convert.ToInt32(tbQuantity.Text);
-                mainLogic.AddItem(selectedItem, qnty);
+                bool isValidQuantity = int.TryParse(tbQuantity.Text, out int quantity);
+                if (isValidQuantity && quantity > 0)
+                {
+                    mainLogic.AddItem(selectedItem, quantity);
+                }
 
                 tbQuantity.Text = "0";
-                lblPrice.Content = "0.00";
+                lblPrice.Content = "0";
                 lblInvoiceTotal.Content = mainLogic.CurrentInvoice.Total.ToString();
                 cbItems.SelectedIndex = -1;
 
@@ -236,6 +235,11 @@ namespace Group_Project_3280.Main
             }
         }
 
+        /// <summary>
+        /// Deletes item from the invoice.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteItem_Click( object sender, RoutedEventArgs e )
         {
             try
@@ -263,6 +267,11 @@ namespace Group_Project_3280.Main
             }
         }
 
+        /// <summary>
+        /// Saves the new invoice to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveInvoice_Click( object sender, RoutedEventArgs e )
         {
             try
@@ -294,6 +303,11 @@ namespace Group_Project_3280.Main
             }
         }
 
+        /// <summary>
+        /// Selects item and enables the delete button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbItems_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             try
