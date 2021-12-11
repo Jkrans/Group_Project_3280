@@ -39,7 +39,10 @@ namespace Group_Project_3280.Main
         /// </summary>
         private Item selectedItem;
 
-        private clsDataAccess da;
+        /// <summary>
+        /// Data access object.
+        /// </summary>
+        private clsDataAccess dataAccess;
 
         /// <summary>
         /// Default constructor
@@ -49,7 +52,7 @@ namespace Group_Project_3280.Main
             InitializeComponent();
             mainLogic = new clsMainLogic();
             handler = new ExceptionHandler();
-            da = new clsDataAccess();
+            dataAccess = new clsDataAccess();
         }
 
         /// <summary>
@@ -59,8 +62,28 @@ namespace Group_Project_3280.Main
         /// <param name="e"></param>
         private void menuSearchInvoice_Click( object sender, RoutedEventArgs e )
         {
-            wndSearch Search = new wndSearch();
-            Search.ShowDialog();
+            wndSearch search = new wndSearch();
+            search.ShowDialog();
+
+            // Waiting for search to be finished. May need to update to match the methods up correctly, but should look something like this. 
+            //if (search.searchLogic.SelectedInvoice == null)
+            //{
+            //    return;
+            //}
+
+            //mainLogic.CurrentInvoice = search.searchLogic.SelectedInvoice;
+            //mainLogic.ResetSelectedInvoice();
+
+            lbItems.IsEnabled = true;
+            btnDeleteInvoice.IsEnabled = true;
+            btnEditInvoice.IsEnabled = true;
+
+            lblInvoiceTotal.Content = "$" + mainLogic.CurrentInvoice.Total.ToString("00.00");
+
+            lbItems.ItemsSource = mainLogic.CurrentInvoice.Items.ToList();
+            lblInvoiceTotal.Content = mainLogic.CurrentInvoice.Total.ToString("00.00");
+            lblInvoiceNumber.Content = mainLogic.CurrentInvoice.Number;
+            tbDate.Text = mainLogic.CurrentInvoice.Date;
         }
 
         /// <summary>
@@ -70,8 +93,17 @@ namespace Group_Project_3280.Main
         /// <param name="e"></param>
         private void menuItemListMenu_Click( object sender, RoutedEventArgs e )
         {
-            wndItems Items = new wndItems();
-            Items.ShowDialog();
+            try
+            {
+                wndItems Items = new wndItems();
+                Items.ShowDialog();
+                mainLogic.ResetItemsList();
+                cbItems.ItemsSource = mainLogic.ItemsList.ToList();
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
