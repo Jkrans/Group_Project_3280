@@ -20,7 +20,7 @@ using System.Windows.Shapes;
 namespace Group_Project_3280.Main
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml 
     /// </summary>
     public partial class wndMain : Window
     {
