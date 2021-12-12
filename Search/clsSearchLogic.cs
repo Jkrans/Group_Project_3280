@@ -19,7 +19,7 @@ namespace Group_Project_3280.Search
         /// <summary>
         /// Invoice
         /// </summary>
-        private Invoice invoice;
+        public Invoice invoice;
 
         /// <summary>
         /// Items list
@@ -34,7 +34,12 @@ namespace Group_Project_3280.Search
         /// <summary>
         /// invoice sent to main
         /// </summary>
-        private List<Invoice> selectInvoice;
+        public List<Invoice> selectInvoice;
+
+      /*  /// <summary>
+        /// invoice sent to main
+        /// </summary>
+       // public List<Invoice> selectedInvoice;*/
 
         /// <summary>
         /// Default constructor
@@ -66,7 +71,7 @@ namespace Group_Project_3280.Search
             set { selectInvoices = value; }
         }
 
-        public List<Invoice> SendInv
+        public List<Invoice> SelectedInvoice
         {
             get { return selectInvoice; }
             set { selectInvoice = value; }
@@ -86,10 +91,11 @@ namespace Group_Project_3280.Search
             }
         }
 
-            public void sendInv(object inv)
+            public Invoice sendInv(object inv)
         {
-            List<Invoice> SendInv = new List<Invoice>();
-            SendInv.Add(new Invoice = inv[0];
+            invoice = (Invoice)inv;
+            return invoice;
+            
         }
 
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,7 +36,7 @@ namespace Group_Project_3280.Search
         /// <summary>
         /// The items that is currently selected.
         /// </summary>
-       // private Invoice selectedInvoice;
+        public Invoice selectedInvoice;
 
         private clsDataAccess da;
 
@@ -64,10 +65,6 @@ namespace Group_Project_3280.Search
 
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         /// <summary>
         /// selects the database item from the databox
         /// </summary>
@@ -85,13 +82,16 @@ namespace Group_Project_3280.Search
         /// <param name="e"></param>
         private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
-            //open the selected invoice up for viewing on the main screen
-            this.Hide();// closes wndSearch
-            wndMain wndMain = new wndMain();
-            //wndMain();
-
-
-
+            try
+            {
+                //open the selected invoice up for viewing on the main screen
+                this.Hide();// closes wndSearch
+                wndMain wndMain = new wndMain(SearchLogic.sendInv(dgInvoice.SelectedItem));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -101,39 +101,49 @@ namespace Group_Project_3280.Search
         /// <param name="e"></param>
         private void ClearSelection_Btn_Click(object sender, RoutedEventArgs e)
         {
-            //reset the form to the inital state.
-            Invoice_Number_DropBx.Items.Clear();
-            Invoice_Date_DropBx.Items.Clear();
-            Total_Charges_DropBx.Items.Clear();
+            try
+            {
+                //reset the form to the inital state.
+                Invoice_Number_DropBx.Items.Clear();
+                Invoice_Date_DropBx.Items.Clear();
+                Total_Charges_DropBx.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
         }
 
-
-        private void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            string message = dgInvoice.SelectedItem.ToString();
-            MessageBox.Show(message);
-        }
-
+        /// <summary>
+        /// Populates the datagrid based on the combo box selections
+        /// </summary>
         private void update()
         {
-            string num = "", date = "", cost = "";
-
-            if (Invoice_Number_DropBx.SelectedItem != null)
+            try
             {
-                num = Invoice_Number_DropBx.SelectedItem.ToString();
-            }
-            if (Invoice_Date_DropBx.SelectedItem != null)
-            {
-                date = Invoice_Date_DropBx.SelectedItem.ToString();
-            }
-            if (Total_Charges_DropBx.SelectedItem != null)
-            {
-                cost = Total_Charges_DropBx.SelectedItem.ToString();
-            }
+                string num = "", date = "", cost = "";
 
-            SearchLogic.Search(num, date, cost);
+                if (Invoice_Number_DropBx.SelectedItem != null)
+                {
+                    num = Invoice_Number_DropBx.SelectedItem.ToString();
+                }
+                if (Invoice_Date_DropBx.SelectedItem != null)
+                {
+                    date = Invoice_Date_DropBx.SelectedItem.ToString();
+                }
+                if (Total_Charges_DropBx.SelectedItem != null)
+                {
+                    cost = Total_Charges_DropBx.SelectedItem.ToString();
+                }
 
-            dgInvoice.ItemsSource = SearchLogic.SelInvoiceList;
+                SearchLogic.Search(num, date, cost);
+
+                dgInvoice.ItemsSource = SearchLogic.SelInvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
         }
 
         private void Invoice_Date_DropBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -146,22 +156,10 @@ namespace Group_Project_3280.Search
             update();
         }
 
-        private void dgInvoice_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            string message = dgInvoice.SelectedItem.ToString();
-            MessageBox.Show(message);
-        }
 
         private void dgInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            if (dgInvoice.SelectedItem != null)
-            {
-                //List<Invoice> select = new List<Invoice>();
-                //select.Add = List<Invoice>dgInvoice.SelectedItem;
-                SearchLogic.sendInv(dgInvoice.SelectedItem);
-            }
-            
+                       
         }
     }
 }
