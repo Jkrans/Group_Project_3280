@@ -20,36 +20,47 @@ namespace Group_Project_3280.Search
     /// </summary>
     public partial class wndSearch : Window
     {
+        ///////////////////////////////////
+        /// <summary>
+        /// Search Logic Object
+        /// </summary>
+        private clsSearchLogic SearchLogic;
+
+        /// <summary>
+        /// Exception handler object
+        /// </summary>
+        private ExceptionHandler handler;
+
+        /// <summary>
+        /// The items that is currently selected.
+        /// </summary>
+       // private Invoice selectedInvoice;
+
+        private clsDataAccess da;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public wndSearch()
         {
             InitializeComponent();
-            ////////////////////////////////////////////////////////////////////////////
-            /// <summary>
-            /// call function to populate the data grid of all invoices from the database.
-            /// </summary>
-            //clsSearchLogic.dataGridAll()
-            ////////////////////////////////////////////////////////////////////////////
+            SearchLogic = new clsSearchLogic();
+            handler = new ExceptionHandler();
+            da = new clsDataAccess();
+            dgInvoice.ItemsSource = SearchLogic.InvoiceList;
+            for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+            {
+                Invoice_Number_DropBx.Items.Add(SearchLogic.InvoiceList[i].Number);
+            }
+            for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+            {
+                Invoice_Date_DropBx.Items.Add(SearchLogic.InvoiceList[i].Date);
+            }
+            for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+            {
+                Total_Charges_DropBx.Items.Add(SearchLogic.InvoiceList[i].Total);
+            }
 
-            ////////////////////////////////////////////////////////////////////////////
-            /// <summary>
-            /// call function to populate the combobox Invoice_Number_DropBx of all invoice number from the database.
-            /// </summary>
-            //clsSearchLogic.invoices()
-            ///////////////////////////////////////////////////////////////////////////
-
-            ////////////////////////////////////////////////////////////////////////////
-            /// <summary>
-            /// call function to populate the combobox Invoice_Date_DropBx of all invoice dates from the database.
-            /// </summary>
-            //clsSearchLogic.invoiceDates()
-            ///////////////////////////////////////////////////////////////////////////
-
-            ////////////////////////////////////////////////////////////////////////////
-            /// <summary>
-            /// call function to populate the combobox Total_Charges_DropBx of all invoice charges from the database.
-            /// </summary>
-            //clsSearchLogic.invoiceCharges()
-            ///////////////////////////////////////////////////////////////////////////
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -63,7 +74,7 @@ namespace Group_Project_3280.Search
         /// <param name="e"></param>
         private void Invoice_Number_DropBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //(clsInvoices)Invoice_Number_DropBx.SelectedItem.ToString();
+            update();
         }
 
         /// <summary>
@@ -75,6 +86,7 @@ namespace Group_Project_3280.Search
         {
             //open the selected invoice up for viewing on the main screen
             this.Hide();// closes wndSearch
+           
 
         }
 
@@ -90,8 +102,46 @@ namespace Group_Project_3280.Search
 
         private void Search_Btn_Click(object sender, RoutedEventArgs e)
         {
+            //Invoice_Grid.DataSource = SearchLogic.ItemsList;
             //clsSearchSQL.report(selected values); // pass in selected values from comboboxes
             // the DataSet returned from the report()method will be binded to the datagrid
+        }
+
+        private void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void update()
+        {
+            string num = "", date = "", cost = "";
+
+            if (Invoice_Number_DropBx.SelectedItem != null)
+            {
+                num = Invoice_Number_DropBx.SelectedItem.ToString();
+            }
+            if (Invoice_Date_DropBx.SelectedItem != null)
+            {
+                date = Invoice_Date_DropBx.SelectedItem.ToString();
+            }
+            if (Total_Charges_DropBx.SelectedItem != null)
+            {
+                cost = Total_Charges_DropBx.SelectedItem.ToString();
+            }
+
+            SearchLogic.Search(num, date, cost);
+
+            dgInvoice.ItemsSource = SearchLogic.SelInvoiceList;
+        }
+
+        private void Invoice_Date_DropBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            update();
+        }
+
+        private void Total_Charges_DropBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            update();
         }
     }
 }
