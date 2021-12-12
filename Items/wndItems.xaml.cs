@@ -38,12 +38,15 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                iLogic.DeleteItems(ItemDataGrid.SelectedItem.ToString());
+                if (ItemDataGrid.SelectedItem != null)
+                    iLogic.DeleteItems(ItemDataGrid.SelectedItem.ToString());
+                else
+                    MessageBox.Show("An item must be selected before it can be deleted. ");
                 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
 
@@ -52,8 +55,9 @@ namespace Group_Project_3280.Items
         private void UpdateDescButton_Click(object sender, RoutedEventArgs e)
         {
             try {
-                    operationType = 1; 
-                    AddItemGrid.Visibility = Visibility.Hidden;
+                    operationType = 1;
+                //make all other grids not visible and set updateDesc to visible 
+                AddItemGrid.Visibility = Visibility.Hidden;
                     UpdateLineGrid.Visibility = Visibility.Hidden;
                     UpdateDescGrid.Visibility = Visibility.Visible; 
             }
@@ -116,7 +120,8 @@ namespace Group_Project_3280.Items
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
             try {
-                operationType = 3; 
+                operationType = 3;
+                //make all other grids not visible and set addItemGrid to visible 
                 AddItemGrid.Visibility = Visibility.Visible;
                 UpdateDescGrid.Visibility = Visibility.Hidden;
                 UpdateLineGrid.Visibility = Visibility.Hidden;

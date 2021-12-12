@@ -20,7 +20,7 @@
         <!-- visibile after update Description button is pushed -->
         <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Height="35" Margin="498,321,0,0" VerticalAlignment="Top" Width="117" Click="SaveButton_Click"/>
         <Button x:Name="UpdateLineButton" Content="Update Line Item" HorizontalAlignment="Left" Height="30" Margin="498,127,0,0" VerticalAlignment="Top" Width="117" Click="UpdateLineItem_Click"/>
-        <Grid x:Name="UpdateLineGrid" HorizontalAlignment="Left" Height="138" Margin="47,218,0,0" VerticalAlignment="Top" Width="354" Visibility="Hidden">
+        <Grid x:Name="UpdateLineGrid" HorizontalAlignment="Left" Height="138" Margin="47,218,0,0" VerticalAlignment="Top" Width="354" Visibility="visible">
             <!-- visibile after update Line Item button is pushed -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="99*"/>
@@ -29,13 +29,13 @@
             <Label Content="Invoice Number:" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="99" Margin="-3,0,0,0"/>
             <Label Content="Line Number: " HorizontalAlignment="Left" Height="32" Margin="107,0,0,0" VerticalAlignment="Top" Width="80"/>
             <TextBox x:Name="InvoiceNumberTextBox" HorizontalAlignment="Left" Height="27" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
-            <TextBox x:Name="LineNumberTextBox" HorizontalAlignment="Left" Height="27" Margin="107,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" TextChanged="ItemLineTextBox2_TextChanged" IsEnabled="False"/>
+            <TextBox x:Name="LineNumberTextBox" HorizontalAlignment="Left" Height="27" Margin="107,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" IsEnabled="False"/>
             <Label Content="Cost: " HorizontalAlignment="Left" Height="32" Margin="207,0,0,0" VerticalAlignment="Top" Width="74"/>
             <TextBox x:Name="LineItemCostTextBox" HorizontalAlignment="Left" Height="27" Margin="205,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
         </Grid>
 
         <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Height="33" Margin="498,171,0,0" VerticalAlignment="Top" Width="117" Click="AddItemButton_Click"/>
-        <Grid x:Name="AddItemGrid" HorizontalAlignment="Left" Height="136" Margin="24,242,0,0" VerticalAlignment="Top" Width="458" Visibility="Visible">
+        <Grid x:Name="AddItemGrid" HorizontalAlignment="Left" Height="136" Margin="24,242,0,0" VerticalAlignment="Top" Width="458" Visibility="Hidden">
             <!-- visibile after Add Item button is pushed -->
             <Label Content="Item Description:" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="105" Margin="10,0,0,0"/>
             <Label Content="Cost:" HorizontalAlignment="Left" Height="32" Margin="10,59,0,0" VerticalAlignment="Top" Width="77"/>
