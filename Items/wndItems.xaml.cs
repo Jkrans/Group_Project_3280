@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Group_Project_3280.Items
@@ -20,47 +23,119 @@ namespace Group_Project_3280.Items
     public partial class wndItems : Window
     {
 
-        int operationType = 0; 
+        int operationType = 0;
+        clsItemsLogic iLogic;
+
         public wndItems()
         {
             InitializeComponent();
+            iLogic = new clsItemsLogic();
         }
-
+      
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                iLogic.DeleteItems(ItemDataGrid.SelectedItem.ToString());
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
 
         private void UpdateDescButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateDescGrid.Visibility = Visibility.Visible; 
+            try {
+                    operationType = 1; 
+                    AddItemGrid.Visibility = Visibility.Hidden;
+                    UpdateLineGrid.Visibility = Visibility.Hidden;
+                    UpdateDescGrid.Visibility = Visibility.Visible; 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // clsSQL.update();
+            try
+            {
+
+
+                switch (operationType)
+                {
+                    case 1://update Description
+                        iLogic.updateDesc(ItemDescriptionTextBox.Text, ItemCostTextBox.Text);
+
+                        break;
+                    case 2: // update Line Item
+                        iLogic.updateLineItems(InvoiceNumberTextBox.Text, LineNumberTextBox.Text, LineItemCostTextBox.Text);
+
+                        break;
+                    case 3: // add Item
+
+                        iLogic.addItem(AddItemDescriptionTextBox.Text, AddItemCostTextBox.Text, AddItemCodeTextBox.Text);
+
+                        break;
+                    case 0:
+                        MessageBox.Show("an operation must be selected before a save can be complete. ");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
         }
 
         private void UpdateLineItem_Click(object sender, RoutedEventArgs e)
         {
-            UpdateLineGrid.Visibility = Visibility.Visible;
-           // operationType; 
+            try {
+                operationType = 2; 
+                UpdateLineGrid.Visibility = Visibility.Visible;
+                AddItemGrid.Visibility = Visibility.Hidden;
+                UpdateDescGrid.Visibility = Visibility.Hidden;
+            }
+              catch (Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+            // operationType; 
         }
 
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
-            AddItemGrid.Visibility = Visibility.Visible;
-
+            try {
+                operationType = 3; 
+                AddItemGrid.Visibility = Visibility.Visible;
+                UpdateDescGrid.Visibility = Visibility.Hidden;
+                UpdateLineGrid.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
-        private void ItemLineTextBox2_TextChanged( object sender, TextChangedEventArgs e )
-        {
+   
 
+        private void wndItems_loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+              
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
     }
 }
