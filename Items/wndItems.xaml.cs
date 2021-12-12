@@ -148,7 +148,7 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                ItemDataGrid.DataContext = isql.SQLDisplayItems();
+                ItemDataGrid.ItemsSource = isql.SQLGetAllitems();
 
             }
             catch (Exception ex)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group_Project_3280.Items"
         mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="666">
+        Title="wndItems" Height="450" Width="666" Loaded="wndItems_loaded">
     <Grid>
         <Label Content="Items:" HorizontalAlignment="Left" Height="29" Margin="28,33,0,0" VerticalAlignment="Top" Width="85"/>
         <Button x:Name="UpdateDescButton" Content="Update Description" HorizontalAlignment="Left" Height="30" Margin="498,82,0,0" VerticalAlignment="Top" Width="117" Click="UpdateDescButton_Click"/>

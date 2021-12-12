@@ -15,7 +15,9 @@ namespace Group_Project_3280.Items
     /// </summary>
     class clsItemsSQL
     {
-        clsDataAccess da; 
+        clsDataAccess da;
+        DataSet ds;
+       
 
         public clsItemsSQL() {
             try
@@ -99,13 +101,26 @@ namespace Group_Project_3280.Items
             return sSQL;
         }
 
-        public DataSet SQLDisplayItems()
+        public List<Item> SQLGetAllitems()
         {
             int iNumRetValues = 0;
-            DataSet ds;
-            string sSQL = "Select * FROM items";
+            
+
+
+            List<Item> items = new List<Item>();
+
+            string sSQL = "Select ItemCode, ItemDesc, Cost FROM ItemDesc";
+
+            
+
             ds = da.ExecuteSQLStatement(sSQL, ref iNumRetValues);
-            return ds;
+
+            foreach (DataRow dataRow in ds.Tables[0].Rows) // loop through the data set and add items.
+            {
+                items.Add(new Item(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), Convert.ToDouble(dataRow[2])));
+            }
+
+            return items;
         }
 
         

@@ -18,12 +18,17 @@ namespace Group_Project_3280.Items
         clsDataAccess da; 
         DataSet ds;
 
+        private List<Item> Items;
+
         public clsItemsLogic()
         {
             try
             {
+
                 isql = new clsItemsSQL();
                 da = new clsDataAccess();
+
+                Items = isql.SQLGetAllitems();
             }
             catch (Exception ex)
             {
