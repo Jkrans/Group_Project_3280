@@ -16,12 +16,12 @@
             <Label Content="Cost:" HorizontalAlignment="Left" Height="32" Margin="10,59,0,0" VerticalAlignment="Top" Width="77"/>
             <TextBox x:Name="ItemDescriptionTextBox" HorizontalAlignment="Left" Height="27" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238"/>
             <TextBox x:Name="ItemCostTextBox" HorizontalAlignment="Left" Height="27" Margin="10,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        </Grid>
-        <!-- visibile after update Description button is pushed -->
+        </Grid>   <!-- visibile after update Description button is pushed -->
+     
         <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Height="35" Margin="498,321,0,0" VerticalAlignment="Top" Width="117" Click="SaveButton_Click"/>
         <Button x:Name="UpdateLineButton" Content="Update Line Item" HorizontalAlignment="Left" Height="30" Margin="498,127,0,0" VerticalAlignment="Top" Width="117" Click="UpdateLineItem_Click"/>
-        <Grid x:Name="UpdateLineGrid" HorizontalAlignment="Left" Height="138" Margin="47,218,0,0" VerticalAlignment="Top" Width="354" Visibility="visible">
-            <!-- visibile after update Line Item button is pushed -->
+        <Grid x:Name="UpdateLineGrid" HorizontalAlignment="Left" Height="138" Margin="47,218,0,0" VerticalAlignment="Top" Width="354" Visibility="Hidden"><!-- visibile after update Line Item button is pushed -->
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="99*"/>
                 <ColumnDefinition Width="19*"/>
@@ -47,9 +47,7 @@
         <DataGrid x:Name="ItemDataGrid" HorizontalAlignment="Left" Height="136" Margin="36,82,0,0" VerticalAlignment="Top" Width="425" CanUserAddRows="False" SelectionChanged="ItemDB_SelectionChanged" >
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header = "ItemCode" Binding = "{Binding Path = ItemCode}" Width= "100"/>
-                <DataGridTextColumn Header = "ItemDesc" Binding = "{Binding Path = ItemDesc}" Width= "100"/>
-                <DataGridTextColumn Header = "Cost" Binding = "{Binding Path = Cost}" Width= "100"/>
+              
             </DataGrid.Columns>
 
              </DataGrid>

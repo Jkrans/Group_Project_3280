@@ -65,11 +65,11 @@ namespace Group_Project_3280.Items
             }
 
         }
-        public void updateDesc( string ItemDescription, string cost)
+        public void updateDesc(string newDescription, string newCost, Item item)
         {
             try
             {
-                string sSQL = "ItemDesc = '" + ItemDescription + "', Cost = " + cost + ";";
+                string sSQL = "ItemDesc = '" + newDescription + "', Cost = " + newCost + " WHERE ItemCode = '" + item.Code + "';";
                 string execSQL = isql.SQLupdateItems(sSQL);
                 da.ExecuteScalarSQL(execSQL);
 

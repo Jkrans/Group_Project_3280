@@ -78,13 +78,13 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                if (ItemDataGrid.SelectedItem != null)
+                if (ItemDataGrid.SelectedItem != null || operationType == 3)
                 { 
 
                         switch (operationType)
                     {
                         case 1://update Description
-                            iLogic.updateDesc(ItemDescriptionTextBox.Text, ItemCostTextBox.Text);
+                            iLogic.updateDesc(ItemDescriptionTextBox.Text, ItemCostTextBox.Text,  item);
 
                             break;
                         case 2: // update Line Item
@@ -103,7 +103,8 @@ namespace Group_Project_3280.Items
                }
                 else
                     MessageBox.Show("An item must be selected before it can changed ");
-
+                ItemDataGrid.ItemsSource = null; 
+                ItemDataGrid.ItemsSource = isql.SQLGetAllitems();
             }
             catch (Exception ex)
             {
@@ -161,7 +162,14 @@ namespace Group_Project_3280.Items
 
         private void ItemDB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             item = (Item)ItemDataGrid.SelectedItem; 
+            if(ItemDataGrid.SelectedItem != null)
+            { 
+                item = (Item)ItemDataGrid.SelectedItem;
+                ItemDescriptionTextBox.Text = item.Description;
+                ItemCostTextBox.Text = Convert.ToString(item.Cost); 
+            }
+            else
+                return;
 
         }
     }

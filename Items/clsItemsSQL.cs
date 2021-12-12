@@ -56,7 +56,7 @@ namespace Group_Project_3280.Items
         public string SQLupdateItems(string itemUpdateSQL)
         {
             try { 
-            string sSQL = "UPDATE item SET " + itemUpdateSQL;
+            string sSQL = "UPDATE ItemDesc SET " + itemUpdateSQL;
             return sSQL;
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                string sSQL = "DELETE FROM item WHERE itemCode =  " + itemDeleteSQL;
+                string sSQL = "DELETE FROM ItemDesc WHERE itemCode =  " + itemDeleteSQL;
                 return sSQL;
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace Group_Project_3280.Items
         }
         public string SQLInsertItem(string insertItemSQL)
         {
-            string sSQL = " Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values('" + insertItemSQL;
+            string sSQL = " Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values(" + insertItemSQL;
             return sSQL;
         }
 
