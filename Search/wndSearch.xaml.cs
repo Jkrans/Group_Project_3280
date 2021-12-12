@@ -38,6 +38,8 @@ namespace Group_Project_3280.Search
         /// </summary>
         public Invoice selectedInvoice;
 
+        public bool Sorted { get; set; }
+
         private clsDataAccess da;
 
         /// <summary>
@@ -45,14 +47,42 @@ namespace Group_Project_3280.Search
         /// </summary>
         public wndSearch()
         {
-            InitializeComponent();
-            SearchLogic = new clsSearchLogic();
-            handler = new ExceptionHandler();
-            da = new clsDataAccess();
-            dgInvoice.ItemsSource = SearchLogic.InvoiceList;
+            try
+            {
+                InitializeComponent();
+                SearchLogic = new clsSearchLogic();
+                handler = new ExceptionHandler();
+                da = new clsDataAccess();
+                dgInvoice.ItemsSource = SearchLogic.InvoiceList;
+                ComboBox Invoice_Number_DropBx = new ComboBox();
+             
+                build();
+                /*for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+                {
+                    Invoice_Number_DropBx.Items.Add(SearchLogic.InvoiceList[i].Number);
+                }
+                for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+                {
+                    Invoice_Date_DropBx.Items.Add(SearchLogic.InvoiceList[i].Date);
+                }
+                for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
+                {
+                    Total_Charges_DropBx.Items.Add(SearchLogic.InvoiceList[i].Total);
+                }*/
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+
+        }
+
+        private void build()
+        {
             for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
             {
                 Invoice_Number_DropBx.Items.Add(SearchLogic.InvoiceList[i].Number);
+                //Invoice_Number_DropBx.Items.SortDescriptions();
             }
             for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
             {
@@ -62,7 +92,7 @@ namespace Group_Project_3280.Search
             {
                 Total_Charges_DropBx.Items.Add(SearchLogic.InvoiceList[i].Total);
             }
-
+            
         }
 
         /// <summary>
@@ -107,6 +137,8 @@ namespace Group_Project_3280.Search
                 Invoice_Number_DropBx.Items.Clear();
                 Invoice_Date_DropBx.Items.Clear();
                 Total_Charges_DropBx.Items.Clear();
+                build();
+                
             }
             catch (Exception ex)
             {
@@ -130,6 +162,7 @@ namespace Group_Project_3280.Search
                 if (Invoice_Date_DropBx.SelectedItem != null)
                 {
                     date = Invoice_Date_DropBx.SelectedItem.ToString();
+                   
                 }
                 if (Total_Charges_DropBx.SelectedItem != null)
                 {
@@ -160,6 +193,11 @@ namespace Group_Project_3280.Search
         private void dgInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                        
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();// closes wndSearch
         }
     }
 }

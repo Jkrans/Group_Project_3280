@@ -46,7 +46,7 @@ namespace Group_Project_3280.Search
             {
                 List<Invoice> invoices = new List<Invoice>();
 
-                string sql = "SELECT * FROM Invoices";
+                string sql = "SELECT * FROM Invoices ORDER BY TotalCost";
 
                 int returnedValue = 0;
 
@@ -54,7 +54,7 @@ namespace Group_Project_3280.Search
 
                 foreach (DataRow dataRow in ds.Tables[0].Rows) // loop through the data set and add items.
                 {
-                    invoices.Add(new Invoice(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), Convert.ToDouble(dataRow[2])));
+                    invoices.Add(new Invoice(Convert.ToChar(dataRow[0]), Convert.ToDateTime(dataRow[1]).ToString("MM/dd/yyyy"), Convert.ToDouble(dataRow[2])));
                 }
 
                 return invoices;
@@ -79,12 +79,12 @@ namespace Group_Project_3280.Search
                     Num = " Where " + "InvoiceNum = " + num;
                     if ((date != "") && (cost != "")) // if all three parameters are provided
                     {
-                        Date = " AND " + "InvoiceDate = " + date;
+                        Date = " AND " + "InvoiceDate = " + DateTime.Parse(date).ToString("MM/dd/yyyy");
                         Cost = " AND " + "TotalCost = " + cost;
                     }
                     else if ((date != "") && (cost == "")) // if only num and date are provided
                     {
-                        Date = " AND " + "InvoiceDate = " + date;
+                        Date = " AND " + "InvoiceDate = " + DateTime.Parse(date).ToString("MM/dd/yyyy");
                     }
                     else if ((date == "") && (cost != ""))// if only num and cost are provided
                     {
@@ -95,18 +95,19 @@ namespace Group_Project_3280.Search
                 {
                     if ((date != "") && (cost != "")) // if date and cost are provided
                     {
-                        Date = " Where " + "InvoiceDate = " + date;
+                        Date = " Where " + "InvoiceDate = " + DateTime.Parse(date).ToString("MM/dd/yyyy");
                         Cost = " AND " + "TotalCost = " + cost;
                     }
                     else if ((date != "") && (cost == "")) // if only date is provided
                     {
-                        Date = " Where " + "InvoiceDate = " + date;
+                        Date = " Where " + "InvoiceDate = " + DateTime.Parse(date).ToString("MM/dd/yyyy");
                     }
                     else if ((date == "") && (cost != "")) // if only cost is provided
                     {
                         Cost = " Where " + "TotalCost = " + cost;
                     }
                 }
+
                 //DateTime enteredDate = DateTime.Parse(Date);
                 sSQL = Num + Date + Cost;
 
@@ -115,13 +116,11 @@ namespace Group_Project_3280.Search
                     string sql = "SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices " + sSQL;
 
                     int returnedValue = 0;
-
-
                     ds = dataAccess.ExecuteSQLStatement(sql, ref returnedValue);
 
                     foreach (DataRow dataRow in ds.Tables[0].Rows) // loop through the data set and add items.
                     {
-                        SelectedIvoices.Add(new Invoice(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), Convert.ToDouble(dataRow[2])));
+                        SelectedIvoices.Add(new Invoice(Convert.ToChar(dataRow[0]), Convert.ToDateTime(dataRow[1]).ToString("MM/dd/yyyy"), Convert.ToDouble(dataRow[2])));
                     }
 
                     return SelectedIvoices;
@@ -135,11 +134,6 @@ namespace Group_Project_3280.Search
 
             }
         }
-
-
-
-
-
 
     }
 }
