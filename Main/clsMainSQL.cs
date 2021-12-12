@@ -34,7 +34,7 @@ namespace Group_Project_3280.Main
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
-        }
+        }   
 
         #region SQL insert queries
         ///<summary>
