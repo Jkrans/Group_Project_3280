@@ -3,63 +3,78 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Group_Project_3280.Search
 {
-    public static class clsSearchLogic
+    class clsSearchLogic
     {
-        ////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// the business logic to populate the datagrid with invoices
+        /// SQL Object
         /// </summary>
-        /// <returns>BindingList<clsInvoices></returns>
-        /*public static BindingList<clsInvoices> dataGridAll()
-        {
-            //write code to build a Binding list
-            //fucntion to call a SQL statment
-            DataSet ds;
-            ds = FullData(); // gets the database from the SQL executing funtion Fulldata()
+        private clsSearchSQL sSQL;
 
-
-            //add the ds DataSet to the binding list
-
-            //bind binding list to the datagrid in wndSearch
-        }*/
-        ////////////////////////////////////////////////////////////////////
-
-        //////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// the business logic to populate the combobox Invoice_Number_DropBx with invoice numbers
+        /// Invoice
         /// </summary>
-        /*public static void invoices()
-        {
-            DataSet ds = dataGridAll(); 
-            //bind just the invoice numbers to combobox Invoice_Number_DropBx
-        }*/
-        /////////////////////////////////////////////////////////////////
+        private Invoice invoice;
 
-        //////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// the business logic to populate the combobox Invoice_Date_DropBx with invoice dates
+        /// Items list
         /// </summary>
-        /*public static void invoiceDates()
-        {
-            DataSet ds = dataGridAll(); 
-            //bind just the invoice dates to combobox Invoice_Date_DropBx
-        }*/
-        /////////////////////////////////////////////////////////////////
+        private List<Invoice> invoices;
 
-        //////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// the business logic to populate the combobox Total_Charges_DropBx with invoice charges
+        /// Items list
         /// </summary>
-        /*public static void invoiceCharges()
+        private List<Invoice> selectInvoices;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public clsSearchLogic()
         {
-            DataSet ds = dataGridAll(); 
-            //bind just the invoice dates to combobox Invoice_Date_DropBx
-        }*/
-        /////////////////////////////////////////////////////////////////
+            try
+            {
+                sSQL = new clsSearchSQL();
+                invoices = sSQL.GetAllInvoices();
+            }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+                }
+            }
+
+        /// <summary>
+        /// Items list property.
+        /// </summary>
+        public List<Invoice> InvoiceList
+        {
+            get { return invoices; }
+            set { invoices = value; }
+        }
+        public List<Invoice> SelInvoiceList
+        {
+            get { return selectInvoices; }
+            set { selectInvoices = value; }
+        }
+
+        public void Search(string Invoice_Number_DropBx, string Invoice_Date_DropBx, string Total_Charges_DropBx)
+        {
+            try
+            {
+                sSQL = new clsSearchSQL();
+                selectInvoices = sSQL.GetSelectedIvoices(Invoice_Number_DropBx, Invoice_Date_DropBx, Total_Charges_DropBx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+
+
+
     }
 }

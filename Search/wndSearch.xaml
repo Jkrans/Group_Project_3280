@@ -7,34 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="570.788" Width="1069.25">
     <Grid>
-        <DataGrid x:Name="DataGrid" HorizontalAlignment="Left" Height="193" Margin="38,118,0,0" VerticalAlignment="Top" Width="410" SelectionChanged="DataGrid_SelectionChanged"/>
-        <Button x:Name="SelectBtn" Content="Select" HorizontalAlignment="Left" Margin="221,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Click="SelectBtn_Click">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="997*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="SelectBtn" Content="Select" HorizontalAlignment="Left" Margin="144.8,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Click="SelectBtn_Click" Grid.Column="1">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="CancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="509,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30">
+        <Button x:Name="CancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="432.8,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Grid.Column="1">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <ComboBox x:Name="Invoice_Number_DropBx" HorizontalAlignment="Left" Margin="509,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="30" SelectionChanged="Invoice_Number_DropBx_SelectionChanged"/>
-        <Label x:Name="Invoice_NumberTxBx" Content="Invoice Number" HorizontalAlignment="Left" Height="37" Margin="506,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20"/>
-        <ComboBox x:Name="Invoice_Date_DropBx" HorizontalAlignment="Left" Margin="690,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="30"/>
-        <Label x:Name="Invoice_Date_TxtBx" Content="Invoice Date" HorizontalAlignment="Left" Height="37" Margin="687,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20"/>
-        <ComboBox x:Name="Total_Charges_DropBx" HorizontalAlignment="Left" Margin="874,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="30"/>
-        <Label x:Name="Total_Charges_TxBx" Content="Total Charges " HorizontalAlignment="Left" Height="37" Margin="871,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20"/>
-        <Button x:Name="ClearSelection_Btn" Content="Clear" HorizontalAlignment="Left" Margin="796,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Click="ClearSelection_Btn_Click">
+        <ComboBox x:Name="Invoice_Number_DropBx" HorizontalAlignment="Left" Margin="432.8,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="20" SelectionChanged="Invoice_Number_DropBx_SelectionChanged" Grid.Column="1"/>
+        <Label x:Name="Invoice_NumberTxBx" Content="Invoice Number" HorizontalAlignment="Left" Height="37" Margin="429.8,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20" Grid.Column="1"/>
+        <ComboBox x:Name="Invoice_Date_DropBx" HorizontalAlignment="Left" Margin="613.8,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="20" Grid.Column="1" SelectionChanged="Invoice_Date_DropBx_SelectionChanged"/>
+        <Label x:Name="Invoice_Date_TxtBx" Content="Invoice Date" HorizontalAlignment="Left" Height="37" Margin="610.8,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20" Grid.Column="1"/>
+        <ComboBox x:Name="Total_Charges_DropBx" HorizontalAlignment="Left" Margin="797.8,118,0,0" VerticalAlignment="Top" Width="160" Height="30" FontSize="20" Grid.Column="1" SelectionChanged="Total_Charges_DropBx_SelectionChanged"/>
+        <Label x:Name="Total_Charges_TxBx" Content="Total Charges " HorizontalAlignment="Left" Height="37" Margin="794.8,76,0,0" VerticalAlignment="Top" Width="163" FontSize="20" Grid.Column="1"/>
+        <Button x:Name="ClearSelection_Btn" Content="Clear" HorizontalAlignment="Left" Margin="719.8,406,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Click="ClearSelection_Btn_Click" Grid.Column="1">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="Search_Btn" Content="Search" HorizontalAlignment="Left" Margin="687,192,0,0" VerticalAlignment="Top" Width="172" Height="46" FontSize="30" Click="Search_Btn_Click">
-            <Button.Effect>
-                <DropShadowEffect/>
-            </Button.Effect>
-        </Button>
-        <GroupBox x:Name="Invoice_Search" Header="Invoice Search" HorizontalAlignment="Left" Height="238" Margin="486,56,0,0" VerticalAlignment="Top" Width="568"/>
+        <GroupBox x:Name="Invoice_Search" Header="Invoice Search" HorizontalAlignment="Left" Height="238" Margin="409.8,56,0,0" VerticalAlignment="Top" Width="568" Grid.Column="1"/>
+        <DataGrid Name="dgInvoice" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="324" Margin="10,10,0,0" VerticalAlignment="Top" Width="434"/>
 
     </Grid>
 </Window>
