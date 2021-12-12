@@ -35,6 +35,11 @@ namespace Group_Project_3280.Search
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Creat SQL statement to get all invoices
+        /// </summary>
+        /// <returns></returns>
         public List<Invoice> GetAllInvoices()
         {
             try

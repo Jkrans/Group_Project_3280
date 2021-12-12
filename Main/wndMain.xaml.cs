@@ -54,23 +54,13 @@ namespace Group_Project_3280.Main
             handler = new ExceptionHandler();
             dataAccess = new clsDataAccess();
         }
-
-        /// <summary>
-        /// Open Search window.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void menuSearchInvoice_Click( object sender, RoutedEventArgs e )
+        public wndMain(Invoice inv)
         {
-            wndSearch search = new wndSearch();
-            search.ShowDialog();
-
-            if (search.SearchLogic.SelectedInvoice == null)
-            {
-                return;
-            }
-
-            mainLogic.CurrentInvoice = search.SearchLogic.SelectedInvoice;
+            InitializeComponent();
+            mainLogic = new clsMainLogic();
+            handler = new ExceptionHandler();
+            dataAccess = new clsDataAccess();
+            mainLogic.CurrentInvoice = inv;
             mainLogic.ResetSelectedInvoice();
 
             lbItems.IsEnabled = true;
@@ -83,6 +73,27 @@ namespace Group_Project_3280.Main
             lblInvoiceTotal.Content = mainLogic.CurrentInvoice.Total.ToString("00.00");
             lblInvoiceNumber.Content = mainLogic.CurrentInvoice.Number;
             tbDate.Text = mainLogic.CurrentInvoice.Date;
+        }
+
+
+        /// <summary>
+        /// Open Search window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuSearchInvoice_Click( object sender, RoutedEventArgs e )
+        {
+            wndSearch search = new wndSearch();
+            search.ShowDialog();
+
+            /*if (search.SearchLogic.SelectedInvoice == null)
+            {
+                return;
+            }
+
+            mainLogic.CurrentInvoice = search.SearchLogic.SelectedInvoice;
+            mainLogic.ResetSelectedInvoice();*/
+
         }
 
         /// <summary>
