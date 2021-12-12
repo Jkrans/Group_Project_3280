@@ -44,7 +44,15 @@
             <Label x:Name="ItemCodeLabel" Content="Item Code: " HorizontalAlignment="Left" Height="27" Margin="151,64,0,0" VerticalAlignment="Top" Width="97"/>
             <TextBox x:Name="AddItemCodeTextBox" HorizontalAlignment="Left" Height="27" Margin="151,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         </Grid>
-        <DataGrid x:Name="ItemDataGrid" HorizontalAlignment="Left" Height="136" Margin="36,82,0,0" VerticalAlignment="Top" Width="425"/>
+        <DataGrid x:Name="ItemDataGrid" HorizontalAlignment="Left" Height="136" Margin="36,82,0,0" VerticalAlignment="Top" Width="425" CanUserAddRows="False" SelectionChanged="ItemDB_SelectionChanged" >
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header = "ItemCode" Binding = "{Binding Path = ItemCode}" Width= "100"/>
+                <DataGridTextColumn Header = "ItemDesc" Binding = "{Binding Path = ItemDesc}" Width= "100"/>
+                <DataGridTextColumn Header = "Cost" Binding = "{Binding Path = Cost}" Width= "100"/>
+            </DataGrid.Columns>
+
+             </DataGrid>
 
 
 

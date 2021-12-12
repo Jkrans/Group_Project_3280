@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace Group_Project_3280.Items
 {
+
+     
+
     /// <summary>
     /// Interaction logic for wndItems.xaml
     /// </summary>
@@ -25,13 +28,15 @@ namespace Group_Project_3280.Items
 
         int operationType = 0;
         clsItemsLogic iLogic;
-        clsItemsSQL isql; 
+        clsItemsSQL isql;
+        
 
         public wndItems()
         {
             InitializeComponent();
             iLogic = new clsItemsLogic();
             isql = new clsItemsSQL();
+
         }
       
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -150,6 +155,11 @@ namespace Group_Project_3280.Items
             {
                 MessageBox.Show(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
+        }
+
+        private void ItemDB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Item item = (Item)ItemDataGrid.SelectedItem; 
         }
     }
 }
