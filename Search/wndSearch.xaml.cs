@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Group_Project_3280.Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Group_Project_3280.Search
         /// <summary>
         /// Search Logic Object
         /// </summary>
-        public clsSearchLogic SearchLogic;
+        private clsSearchLogic SearchLogic;
 
         /// <summary>
         /// Exception handler object
         /// </summary>
-        public ExceptionHandler handler;
+        private ExceptionHandler handler;
 
         /// <summary>
         /// The items that is currently selected.
@@ -86,7 +87,10 @@ namespace Group_Project_3280.Search
         {
             //open the selected invoice up for viewing on the main screen
             this.Hide();// closes wndSearch
-           
+            wndMain wndMain = new wndMain();
+            //wndMain();
+
+
 
         }
 
@@ -98,18 +102,16 @@ namespace Group_Project_3280.Search
         private void ClearSelection_Btn_Click(object sender, RoutedEventArgs e)
         {
             //reset the form to the inital state.
+            Invoice_Number_DropBx.Items.Clear();
+            Invoice_Date_DropBx.Items.Clear();
+            Total_Charges_DropBx.Items.Clear();
         }
 
-        private void Search_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            //Invoice_Grid.DataSource = SearchLogic.ItemsList;
-            //clsSearchSQL.report(selected values); // pass in selected values from comboboxes
-            // the DataSet returned from the report()method will be binded to the datagrid
-        }
 
         private void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-
+            string message = dgInvoice.SelectedItem.ToString();
+            MessageBox.Show(message);
         }
 
         private void update()
@@ -142,6 +144,24 @@ namespace Group_Project_3280.Search
         private void Total_Charges_DropBx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             update();
+        }
+
+        private void dgInvoice_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string message = dgInvoice.SelectedItem.ToString();
+            MessageBox.Show(message);
+        }
+
+        private void dgInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            if (dgInvoice.SelectedItem != null)
+            {
+                //List<Invoice> select = new List<Invoice>();
+                //select.Add = List<Invoice>dgInvoice.SelectedItem;
+                SearchLogic.sendInv(dgInvoice.SelectedItem);
+            }
+            
         }
     }
 }

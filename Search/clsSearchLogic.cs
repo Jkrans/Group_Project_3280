@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Group_Project_3280.Search
 {
-    public class clsSearchLogic
+    class clsSearchLogic
     {
         /// <summary>
         /// SQL Object
@@ -30,6 +30,11 @@ namespace Group_Project_3280.Search
         /// Items list
         /// </summary>
         private List<Invoice> selectInvoices;
+
+        /// <summary>
+        /// invoice sent to main
+        /// </summary>
+        private List<Invoice> selectInvoice;
 
         /// <summary>
         /// Default constructor
@@ -55,21 +60,18 @@ namespace Group_Project_3280.Search
             get { return invoices; }
             set { invoices = value; }
         }
-
-        /// <summary>
-        /// Property for selected invoice. 
-        /// </summary>
-        public Invoice SelectedInvoice
-        {
-            get { return invoice; }
-            set { invoice = value; }
-        }
-
         public List<Invoice> SelInvoiceList
         {
             get { return selectInvoices; }
             set { selectInvoices = value; }
         }
+
+        public List<Invoice> SendInv
+        {
+            get { return selectInvoice; }
+            set { selectInvoice = value; }
+        }
+
 
         public void Search(string Invoice_Number_DropBx, string Invoice_Date_DropBx, string Total_Charges_DropBx)
         {
@@ -84,7 +86,11 @@ namespace Group_Project_3280.Search
             }
         }
 
-
+            public void sendInv(object inv)
+        {
+            List<Invoice> SendInv = new List<Invoice>();
+            SendInv.Add(new Invoice = inv[0];
+        }
 
     }
 }
