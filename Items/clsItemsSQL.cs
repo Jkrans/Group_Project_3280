@@ -18,7 +18,9 @@ namespace Group_Project_3280.Items
         clsDataAccess da;
         DataSet ds;
        
-
+        /// <summary>
+        /// constructor
+        /// </summary>
         public clsItemsSQL() {
             try
             {
@@ -39,7 +41,7 @@ namespace Group_Project_3280.Items
         public string SQLSelectItems( string itemName )
         {
             try { 
-            string sSQL = "SELECT * FROM LineItems Where ItemName = '" + itemName ;
+            string sSQL = "SELECT InvoiceNum FROM LineItems Where ItemCode = '" + itemName + "';";
             return sSQL;
             }
             catch (Exception ex)
@@ -65,7 +67,11 @@ namespace Group_Project_3280.Items
              }
           }
 
-
+        /// <summary>
+        /// updates LineItem From User Input
+        /// </summary>
+        /// <param name="lineItemUpdateSQL"></param>
+        /// <returns></returns>
         public string SQLupdateLineItems(string lineItemUpdateSQL)
         {
             try
@@ -86,7 +92,7 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                string sSQL = "DELETE FROM ItemDesc WHERE itemCode =  " + itemDeleteSQL;
+                string sSQL = "DELETE FROM ItemDesc WHERE ItemCode =  " + itemDeleteSQL;
                 return sSQL;
             }
             catch (Exception ex)
@@ -95,12 +101,20 @@ namespace Group_Project_3280.Items
             }
 
         }
+        /// <summary>
+        /// Creates a Sql Statement to insert into ItemDesc from data entered by user. 
+        /// </summary>
+        /// <param name="insertItemSQL"></param>
+        /// <returns></returns>
         public string SQLInsertItem(string insertItemSQL)
         {
             string sSQL = " Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values(" + insertItemSQL;
             return sSQL;
         }
-
+        /// <summary>
+        /// gets all enteries in the ItemDesc Table then inserts the results in a list that is then sent to the window to be displayed
+        /// </summary>
+        /// <returns></returns>
         public List<Item> SQLGetAllitems()
         {
             int iNumRetValues = 0;
