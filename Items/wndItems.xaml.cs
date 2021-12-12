@@ -71,27 +71,32 @@ namespace Group_Project_3280.Items
         {
             try
             {
+                if (ItemDataGrid.SelectedItem != null)
+                { 
 
+                        switch (operationType)
+                    {
+                        case 1://update Description
+                            iLogic.updateDesc(ItemDescriptionTextBox.Text, ItemCostTextBox.Text);
 
-                switch (operationType)
-                {
-                    case 1://update Description
-                        iLogic.updateDesc(ItemDescriptionTextBox.Text, ItemCostTextBox.Text);
+                            break;
+                        case 2: // update Line Item
+                            iLogic.updateLineItems(InvoiceNumberTextBox.Text, LineNumberTextBox.Text, LineItemCostTextBox.Text);
 
-                        break;
-                    case 2: // update Line Item
-                        iLogic.updateLineItems(InvoiceNumberTextBox.Text, LineNumberTextBox.Text, LineItemCostTextBox.Text);
+                            break;
+                        case 3: // add Item
 
-                        break;
-                    case 3: // add Item
+                            iLogic.addItem(AddItemDescriptionTextBox.Text, AddItemCostTextBox.Text, AddItemCodeTextBox.Text);
 
-                        iLogic.addItem(AddItemDescriptionTextBox.Text, AddItemCostTextBox.Text, AddItemCodeTextBox.Text);
+                            break;
+                        case 0:
+                            MessageBox.Show("an operation must be selected before a save can be complete. ");
+                            break;
+                    }
+               }
+                else
+                    MessageBox.Show("An item must be selected before it can changed ");
 
-                        break;
-                    case 0:
-                        MessageBox.Show("an operation must be selected before a save can be complete. ");
-                        break;
-                }
             }
             catch (Exception ex)
             {
