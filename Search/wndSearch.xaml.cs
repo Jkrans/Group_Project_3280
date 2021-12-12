@@ -38,6 +38,8 @@ namespace Group_Project_3280.Search
         /// </summary>
         public Invoice selectedInvoice;
 
+        public bool Sorted { get; set; }
+
         private clsDataAccess da;
 
         /// <summary>
@@ -52,6 +54,8 @@ namespace Group_Project_3280.Search
                 handler = new ExceptionHandler();
                 da = new clsDataAccess();
                 dgInvoice.ItemsSource = SearchLogic.InvoiceList;
+                ComboBox Invoice_Number_DropBx = new ComboBox();
+             
                 build();
                 /*for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
                 {
@@ -78,6 +82,7 @@ namespace Group_Project_3280.Search
             for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
             {
                 Invoice_Number_DropBx.Items.Add(SearchLogic.InvoiceList[i].Number);
+                //Invoice_Number_DropBx.Items.SortDescriptions();
             }
             for (int i = 0; i < SearchLogic.InvoiceList.Count(); i++)
             {
@@ -87,6 +92,7 @@ namespace Group_Project_3280.Search
             {
                 Total_Charges_DropBx.Items.Add(SearchLogic.InvoiceList[i].Total);
             }
+            
         }
 
         /// <summary>
