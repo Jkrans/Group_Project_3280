@@ -102,8 +102,8 @@ namespace Group_Project_3280.Search
                         Cost = " Where " + "TotalCost = " + cost;
                     }
                 }
-                DateTime enteredDate = DateTime.Parse(Date);
-                sSQL = Num + enteredDate + Cost;
+                //DateTime enteredDate = DateTime.Parse(Date);
+                sSQL = Num + Date + Cost;
 
 
                     List<Invoice> SelectedIvoices = new List<Invoice>();

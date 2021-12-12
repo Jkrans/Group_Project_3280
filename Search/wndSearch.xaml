@@ -33,7 +33,7 @@
             </Button.Effect>
         </Button>
         <GroupBox x:Name="Invoice_Search" Header="Invoice Search" HorizontalAlignment="Left" Height="238" Margin="409.8,56,0,0" VerticalAlignment="Top" Width="568" Grid.Column="1"/>
-        <DataGrid Name="dgInvoice" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="324" Margin="10,10,0,0" VerticalAlignment="Top" Width="434"/>
+        <DataGrid Name="dgInvoice" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="324" Margin="10,10,0,0" VerticalAlignment="Top" Width="434" SelectionChanged="dgInvoice_SelectionChanged"/>
 
     </Grid>
 </Window>

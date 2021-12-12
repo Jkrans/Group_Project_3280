@@ -32,6 +32,11 @@ namespace Group_Project_3280.Search
         private List<Invoice> selectInvoices;
 
         /// <summary>
+        /// invoice sent to main
+        /// </summary>
+        private List<Invoice> selectInvoice;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public clsSearchLogic()
@@ -61,6 +66,13 @@ namespace Group_Project_3280.Search
             set { selectInvoices = value; }
         }
 
+        public List<Invoice> SendInv
+        {
+            get { return selectInvoice; }
+            set { selectInvoice = value; }
+        }
+
+
         public void Search(string Invoice_Number_DropBx, string Invoice_Date_DropBx, string Total_Charges_DropBx)
         {
             try
@@ -74,7 +86,11 @@ namespace Group_Project_3280.Search
             }
         }
 
-
+            public void sendInv(object inv)
+        {
+            List<Invoice> SendInv = new List<Invoice>();
+            SendInv.Add(new Invoice = inv[0];
+        }
 
     }
 }
