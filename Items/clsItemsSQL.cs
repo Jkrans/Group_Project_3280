@@ -15,9 +15,19 @@ namespace Group_Project_3280.Items
     /// </summary>
     class clsItemsSQL
     {
+        clsDataAccess da; 
 
-        public clsItemsSQL() { 
-         
+        public clsItemsSQL() {
+            try
+            {
+                da = new clsDataAccess();
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+            
         }
         /// <summary>
         /// Selects items based on the a name entered by user
@@ -87,6 +97,15 @@ namespace Group_Project_3280.Items
         {
             string sSQL = " Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values('" + insertItemSQL;
             return sSQL;
+        }
+
+        public DataSet SQLDisplayItems()
+        {
+            int iNumRetValues = 0;
+            DataSet ds;
+            string sSQL = "Select * FROM items";
+            ds = da.ExecuteSQLStatement(sSQL, ref iNumRetValues);
+            return ds;
         }
 
         

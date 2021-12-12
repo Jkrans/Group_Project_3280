@@ -25,11 +25,13 @@ namespace Group_Project_3280.Items
 
         int operationType = 0;
         clsItemsLogic iLogic;
+        clsItemsSQL isql; 
 
         public wndItems()
         {
             InitializeComponent();
             iLogic = new clsItemsLogic();
+            isql = new clsItemsSQL();
         }
       
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -98,9 +100,11 @@ namespace Group_Project_3280.Items
         {
             try {
                 operationType = 2; 
+                //make all other grids not visible and set updateLine to visible 
                 UpdateLineGrid.Visibility = Visibility.Visible;
                 AddItemGrid.Visibility = Visibility.Hidden;
                 UpdateDescGrid.Visibility = Visibility.Hidden;
+                
             }
               catch (Exception ex)
             {
@@ -129,7 +133,7 @@ namespace Group_Project_3280.Items
         {
             try
             {
-              
+                ItemDataGrid.DataContext = isql.SQLDisplayItems();
 
             }
             catch (Exception ex)
