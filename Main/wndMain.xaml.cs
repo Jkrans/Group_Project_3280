@@ -65,14 +65,13 @@ namespace Group_Project_3280.Main
             wndSearch search = new wndSearch();
             search.ShowDialog();
 
-            // Waiting for search to be finished. May need to update to match the methods up correctly, but should look something like this. 
-            //if (search.searchLogic.SelectedInvoice == null)
-            //{
-            //    return;
-            //}
+            if (search.SearchLogic.SelectedInvoice == null)
+            {
+                return;
+            }
 
-            //mainLogic.CurrentInvoice = search.searchLogic.SelectedInvoice;
-            //mainLogic.ResetSelectedInvoice();
+            mainLogic.CurrentInvoice = search.SearchLogic.SelectedInvoice;
+            mainLogic.ResetSelectedInvoice();
 
             lbItems.IsEnabled = true;
             btnDeleteInvoice.IsEnabled = true;

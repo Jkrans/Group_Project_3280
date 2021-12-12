@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Group_Project_3280.Search
 {
-    class clsSearchLogic
+    public class clsSearchLogic
     {
         /// <summary>
         /// SQL Object
@@ -55,6 +55,16 @@ namespace Group_Project_3280.Search
             get { return invoices; }
             set { invoices = value; }
         }
+
+        /// <summary>
+        /// Property for selected invoice. 
+        /// </summary>
+        public Invoice SelectedInvoice
+        {
+            get { return invoice; }
+            set { invoice = value; }
+        }
+
         public List<Invoice> SelInvoiceList
         {
             get { return selectInvoices; }

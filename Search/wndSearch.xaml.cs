@@ -24,12 +24,12 @@ namespace Group_Project_3280.Search
         /// <summary>
         /// Search Logic Object
         /// </summary>
-        private clsSearchLogic SearchLogic;
+        public clsSearchLogic SearchLogic;
 
         /// <summary>
         /// Exception handler object
         /// </summary>
-        private ExceptionHandler handler;
+        public ExceptionHandler handler;
 
         /// <summary>
         /// The items that is currently selected.
