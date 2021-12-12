@@ -14,7 +14,7 @@ namespace Group_Project_3280
         /// <summary>
         /// Char for the code
         /// </summary>
-        private char code;
+        private string code;
 
         /// <summary>
         /// Description string
@@ -32,7 +32,7 @@ namespace Group_Project_3280
         /// <param name="ItemCode"></param>
         /// <param name="ItemDescription"></param>
         /// <param name="ItemCost"></param>
-        public Item( char ItemCode, string ItemDescription, double ItemCost )
+        public Item( string ItemCode, string ItemDescription, double ItemCost )
         {
             code = ItemCode;
             description = ItemDescription;
@@ -59,7 +59,7 @@ namespace Group_Project_3280
         /// <summary>
         /// Code property
         /// </summary>
-        public char Code
+        public string Code
         {
             get { return code; }
             set { code = value; }

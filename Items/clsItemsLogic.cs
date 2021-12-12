@@ -37,12 +37,12 @@ namespace Group_Project_3280.Items
 
         }
 
-        public void  DeleteItems(string itemDelete)
+        public void  DeleteItems(Item itemDelete)
         {
             try
             {
                 
-                string sql = isql.SQLDeleteItem(itemDelete);
+                string sql = isql.SQLDeleteItem(itemDelete.Code);
                 int rowsAffected;
                 rowsAffected = da.ExecuteNonQuery(sql);
             }

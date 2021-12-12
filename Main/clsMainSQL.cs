@@ -94,7 +94,7 @@ namespace Group_Project_3280.Main
                 
                 foreach (DataRow dataRow in dataSet.Tables[0].Rows) // loop through the data set and add items.
                 {
-                    items.Add(new Item(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), (float)Convert.ToDouble(dataRow[2])));
+                    items.Add(new Item(Convert.ToString(dataRow[0]), dataRow[1].ToString(), (float)Convert.ToDouble(dataRow[2])));
                 }
 
                 return items;
@@ -156,7 +156,7 @@ namespace Group_Project_3280.Main
 
                 foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                 {
-                    items.Add(new Item(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), (float)Convert.ToDouble(dataRow[2])));
+                    items.Add(new Item(Convert.ToString(dataRow[0]), dataRow[1].ToString(), (float)Convert.ToDouble(dataRow[2])));
                 }
 
                 return items;

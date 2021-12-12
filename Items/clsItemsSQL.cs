@@ -36,10 +36,10 @@ namespace Group_Project_3280.Items
         /// </summary>
         /// <param name="itemName"> string containing a name for an item</param>
         /// <returns></returns>
-        public string SQLSelectItems( string itemName)
+        public string SQLSelectItems( string itemName )
         {
             try { 
-            string sSQL = "SELECT * FROM Items Where ItemName = " + itemName;
+            string sSQL = "SELECT * FROM LineItems Where ItemName = '" + itemName ;
             return sSQL;
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace Group_Project_3280.Items
         {
             try
             {
-                string sSQL = "DELETE FROM item WHERE itemName =  " + itemDeleteSQL;
+                string sSQL = "DELETE FROM item WHERE itemCode =  " + itemDeleteSQL;
                 return sSQL;
             }
             catch (Exception ex)
@@ -117,7 +117,7 @@ namespace Group_Project_3280.Items
 
             foreach (DataRow dataRow in ds.Tables[0].Rows) // loop through the data set and add items.
             {
-                items.Add(new Item(Convert.ToChar(dataRow[0]), dataRow[1].ToString(), Convert.ToDouble(dataRow[2])));
+                items.Add(new Item(Convert.ToString(dataRow[0]), dataRow[1].ToString(), Convert.ToDouble(dataRow[2])));
             }
 
             return items;

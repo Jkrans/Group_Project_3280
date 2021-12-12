@@ -29,7 +29,9 @@ namespace Group_Project_3280.Items
         int operationType = 0;
         clsItemsLogic iLogic;
         clsItemsSQL isql;
-        
+        Item item;
+
+
 
         public wndItems()
         {
@@ -44,7 +46,7 @@ namespace Group_Project_3280.Items
             try
             {
                 if (ItemDataGrid.SelectedItem != null)
-                    iLogic.DeleteItems(ItemDataGrid.SelectedItem.ToString());
+                    iLogic.DeleteItems(item);
                 else
                     MessageBox.Show("An item must be selected before it can be deleted. ");
                 
@@ -159,7 +161,8 @@ namespace Group_Project_3280.Items
 
         private void ItemDB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Item item = (Item)ItemDataGrid.SelectedItem; 
+             item = (Item)ItemDataGrid.SelectedItem; 
+
         }
     }
 }
